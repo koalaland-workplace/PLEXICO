@@ -442,6 +442,8 @@ body.en .en-inline{display:inline;}
 .app-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;}
 .app-tab.tab-plan.active{background:var(--gold);border-color:var(--gold);color:#1a0e00;}
 .app-tab.tab-plan:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.app-shortcut{padding:6px 16px;border-radius:6px;border:1px solid rgba(232,169,42,0.35);background:transparent;color:var(--gold);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.02em;}
+.app-shortcut:hover{background:rgba(232,169,42,0.12);border-color:var(--gold);}
 .ub-lang{display:flex;gap:5px;}
 .ub-lb{padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;}
 .ub-lb:hover,.ub-lb.active{background:var(--blue);border-color:var(--blue);color:#fff;}
@@ -462,6 +464,10 @@ body.en .en-inline{display:inline;}
     <button class="app-tab active" id="tab-present" onclick="switchApp('present',this)">
       <span class="en-inline">📊 Presentation</span>
       <span class="vi-inline">📊 Giới Thiệu</span>
+    </button>
+    <button class="app-shortcut" id="tab-questions" onclick="openQuestions()">
+      <span class="en-inline">❓ Questions</span>
+      <span class="vi-inline">❓ Cần Làm Rõ</span>
     </button>
     <button class="app-tab tab-plan" id="tab-plan" onclick="switchApp('plan',this)">
       <span class="en-inline">🗺️ Market Plan</span>
@@ -2119,7 +2125,7 @@ body.en .en-inline{display:inline;}
     </div>
   </div>
 
-  <div class="card" style="margin-top:18px;padding:0;overflow:hidden;">
+  <div class="card" id="p-questions" style="margin-top:18px;padding:0;overflow:hidden;">
     <div style="padding:18px 20px 10px;">
       <div class="sec-lbl" style="margin-bottom:8px;"><span class="vi-inline">Những vấn đề cần làm rõ với công ty</span><span class="en-inline">Key points to clarify with the company</span></div>
       <h3 style="font-family:'Syne',sans-serif;font-size:1.25rem;line-height:1.2;margin:0 0 8px 0;color:var(--text);"><span class="vi-inline">BẢNG CÂU HỎI THẨM ĐỊNH BẮT BUỘC</span><span class="en-inline">MANDATORY DUE DILIGENCE QUESTIONS</span></h3>
@@ -2304,6 +2310,13 @@ function goTo(id) {
 
 function openPresentation() {
   switchApp('present', document.getElementById('tab-present'));
+}
+
+function openQuestions() {
+  switchApp('plan', document.getElementById('tab-plan'));
+  setTimeout(function() {
+    goTo('p-questions');
+  }, 80);
 }
 
 /* ═══ PRESENTATION LOGIC ═══ */
