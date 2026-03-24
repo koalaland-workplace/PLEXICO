@@ -2119,6 +2119,118 @@ body.en .en-inline{display:inline;}
     </div>
   </div>
 
+  <div class="card" style="margin-top:18px;padding:0;overflow:hidden;">
+    <div style="padding:18px 20px 10px;">
+      <div class="sec-lbl" style="margin-bottom:8px;"><span class="vi-inline">Những vấn đề cần làm rõ với công ty</span><span class="en-inline">Key points to clarify with the company</span></div>
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.25rem;line-height:1.2;margin:0 0 8px 0;color:var(--text);"><span class="vi-inline">BẢNG CÂU HỎI THẨM ĐỊNH BẮT BUỘC</span><span class="en-inline">MANDATORY DUE DILIGENCE QUESTIONS</span></h3>
+      <p class="sec-sub" style="margin:0;"><span class="vi-text">Đề nghị công ty trả lời bằng văn bản kèm tài liệu, ảnh chụp màn hình, địa chỉ ví, báo cáo và điều khoản áp dụng thực tế; không chỉ giải thích miệng.</span><span class="en-text">The company should respond in writing with supporting documents, screenshots, wallet addresses, reports, and the actual governing terms; verbal explanations are not sufficient.</span></p>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="width:18%;"><span class="vi-inline">Chủ đề</span><span class="en-inline">Topic</span></th>
+            <th style="width:49%;"><span class="vi-inline">Những gì công ty cần làm rõ</span><span class="en-inline">What the company needs to clarify</span></th>
+            <th style="width:33%;"><span class="vi-inline">Vì sao quan trọng</span><span class="en-inline">Why this matters</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><span class="vi-inline">1. Dòng tiền thật</span><span class="en-inline">1. Real cash flow</span></strong></td>
+            <td><span class="vi-inline">Cung cấp sơ đồ đầy đủ: tiền nạp của user đi từ ví nào đến ví nào, lên chain/protocol nào, tạo lợi nhuận ở đâu, lợi nhuận nào là gross yield, phần nào giữ lại cho công ty, phần nào trả cho user, phần nào dùng cho referral/bonus.</span><span class="en-inline">Provide the full flow map: where user deposits go, which wallets hold them, which chains/protocols they are deployed into, where profits are generated, what is gross yield, what is retained by the company, what is paid to users, and what funds referral/bonus payouts.</span></td>
+            <td><span class="vi-inline">Nếu không nhìn được luồng tiền thật thì không thể xác minh payout đến từ hoạt động DeFi hay từ dòng tiền mới vào.</span><span class="en-inline">Without a clear real-money flow, it is impossible to verify whether payouts come from DeFi activity or from new inflows.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">2. Protocol & ví on-chain</span><span class="en-inline">2. Protocols & on-chain wallets</span></strong></td>
+            <td><span class="vi-inline">Liệt kê chain, protocol, pool, vault, market maker hoặc chiến lược đang dùng; cung cấp địa chỉ ví treasury/custody, địa chỉ smart contract, dashboard theo dõi PnL/TVL nếu có.</span><span class="en-inline">List every chain, protocol, pool, vault, market maker, or strategy in use; provide treasury/custody wallet addresses, smart contract addresses, and any dashboard used to track PnL/TVL.</span></td>
+            <td><span class="vi-inline">Site nói “liquidity for DApps” nhưng hiện chưa có bằng chứng kỹ thuật công khai đủ để kiểm chứng.</span><span class="en-inline">The site says it provides liquidity for DApps, but there is not enough public technical evidence to verify this.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">3. PUT = 1 USD</span><span class="en-inline">3. PUT = 1 USD</span></strong></td>
+            <td><span class="vi-inline">Giải thích cách neo giá PUT ở mức 1 USD: đây chỉ là đơn vị kế toán nội bộ hay có quỹ dự phòng/tài sản backing? Khi user rút PUT về BTC/ETH/USDT/USDC, nguồn thanh khoản thật đến từ đâu?</span><span class="en-inline">Explain how PUT is kept at 1 USD: is it purely an internal accounting unit or is there a reserve/backing asset pool? When users withdraw PUT into BTC/ETH/USDT/USDC, where does the actual liquidity come from?</span></td>
+            <td><span class="vi-inline">Đây là điểm trung tâm của thanh khoản và khả năng chi trả thực tế.</span><span class="en-inline">This is central to real liquidity and payout capacity.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">4. Payout hằng ngày / hằng tuần</span><span class="en-inline">4. Daily / weekly payouts</span></strong></td>
+            <td><span class="vi-inline">Làm rõ payout DailyFlow và LifeFlow là lợi nhuận đã realized trên chain hay chỉ là accrual nội bộ trên ledger. Cần mẫu đối soát 1 user thực: principal, gross profit, company share, user share, fees, net withdrawal.</span><span class="en-inline">Clarify whether DailyFlow and LifeFlow payouts are realized on-chain profits or only internal ledger accruals. Provide a real sample statement showing principal, gross profit, company share, user share, fees, and net withdrawal.</span></td>
+            <td><span class="vi-inline">Accrual nội bộ khác hoàn toàn với dòng tiền đã thu được thật.</span><span class="en-inline">Internal accrual is very different from cash that has actually been realized.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">5. Mâu thuẫn FAQ và Terms</span><span class="en-inline">5. FAQ vs Terms mismatch</span></strong></td>
+            <td><span class="vi-inline">FAQ nói DailyFlow có thể early close sau 180 ngày; Terms lại nói tài sản được dùng 1 năm, 6 tháng đầu không thể rút và có bảng phạt. Công ty phải xác nhận văn bản nào đang áp dụng, từ ngày nào, cho sản phẩm nào.</span><span class="en-inline">The FAQ says DailyFlow can be early-closed after 180 days, while the Terms state assets are used for 1 year, cannot be withdrawn during the first 6 months, and are subject to penalties. The company must confirm which document governs, from what date, and for which products.</span></td>
+            <td><span class="vi-inline">Đây là rủi ro pháp lý và thanh khoản trực tiếp đối với khách hàng.</span><span class="en-inline">This is a direct legal and liquidity risk for clients.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">6. Phí và chia lợi nhuận</span><span class="en-inline">6. Fees and profit split</span></strong></td>
+            <td><span class="vi-inline">Giải thích đầy đủ cơ chế 65/35 đến 95/5: chia trên gross yield nào, theo ngày hay theo chu kỳ, đã trừ gas/DEX fees/slippage chưa. Đồng thời cung cấp tác động của phí mở sản phẩm 1.5%, phí reinvest 1%, phí chuyển 1 PUT tới net return của user.</span><span class="en-inline">Fully explain the 65/35 to 95/5 structure: what gross yield it applies to, whether it is calculated daily or by cycle, and whether gas/DEX fees/slippage are deducted before or after the split. Also show how the 1.5% opening fee, 1% reinvestment fee, and 1 PUT transfer fee affect user net returns.</span></td>
+            <td><span class="vi-inline">Net yield thực tế có thể thấp hơn nhiều so với mức marketing người dùng nhìn thấy.</span><span class="en-inline">The actual net yield may be materially lower than the marketed headline figure.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">7. Nguồn tiền referral / bonus</span><span class="en-inline">7. Referral / bonus funding</span></strong></td>
+            <td><span class="vi-inline">Công ty cần chứng minh referral rewards, First Month Boost, Leadership Bonus được trả từ nguồn nào: từ company spread, từ treasury marketing, hay từ realized protocol income. Cần bảng minh họa bền vững đơn vị economics.</span><span class="en-inline">The company needs to prove what funds referral rewards, First Month Boost, and Leadership Bonus: company spread, treasury marketing budget, or realized protocol income. A sustainability unit-economics example is required.</span></td>
+            <td><span class="vi-inline">Nếu bonus phụ thuộc mạnh vào tiền mới vào, mô hình sẽ rủi ro hơn rất nhiều.</span><span class="en-inline">If bonuses depend heavily on new inflows, the model becomes materially riskier.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">8. Custody & tách bạch tài sản</span><span class="en-inline">8. Custody & asset segregation</span></strong></td>
+            <td><span class="vi-inline">Làm rõ tài sản user có nằm trong omnibus wallet, ví riêng theo khách, hay ví vận hành chung. Có tách riêng principal, profit payable, marketing treasury và operating treasury không?</span><span class="en-inline">Clarify whether user assets sit in omnibus wallets, customer-specific wallets, or shared operating wallets. Are principal, payable profit, marketing treasury, and operating treasury segregated?</span></td>
+            <td><span class="vi-inline">Không tách bạch tài sản sẽ tăng mạnh rủi ro mất khả năng chi trả khi có stress thanh khoản.</span><span class="en-inline">Lack of segregation materially increases payout risk under liquidity stress.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">9. Audit, bảo mật, proof of reserves</span><span class="en-inline">9. Audit, security, proof of reserves</span></strong></td>
+            <td><span class="vi-inline">Cần tên đơn vị audit, báo cáo audit/smart contract review, quy trình key management, chính sách incident response, proof of reserves hoặc ít nhất là báo cáo AUM/PnL đối soát định kỳ.</span><span class="en-inline">Provide the audit firm name, audit/smart-contract review reports, key-management process, incident response policy, and proof of reserves or at least regular AUM/PnL reconciliation reports.</span></td>
+            <td><span class="vi-inline">Hiện website nói có “rigorous audits” nhưng chưa đưa được bằng chứng công khai tương xứng.</span><span class="en-inline">The website mentions “rigorous audits,” but there is no matching public evidence yet.</span></td>
+          </tr>
+          <tr>
+            <td><strong><span class="vi-inline">10. Pháp lý & đối tượng khách hàng</span><span class="en-inline">10. Legal status & client eligibility</span></strong></td>
+            <td><span class="vi-inline">Giải thích vì sao công ty đăng ký ở Florida nhưng Terms lại ghi natural person “không phải U.S. citizen”. Công ty có giấy phép/miễn trừ nào để nhận và vận hành tài sản số của khách hay không? Đơn vị pháp lý nào ký hợp đồng thật với user?</span><span class="en-inline">Explain why the company is registered in Florida while the Terms say a natural person user must “not be a U.S. citizen.” Does the company hold any licence or exemption to receive and operate client digital assets? Which legal entity actually contracts with the user?</span></td>
+            <td><span class="vi-inline">Đây là điểm rất nhạy cảm về compliance, marketing, và khả năng enforce hợp đồng.</span><span class="en-inline">This is a sensitive issue for compliance, marketing, and contract enforceability.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:12px 16px;font-size:12px;color:var(--muted);border-top:1px solid var(--border2);">
+      <span class="vi-inline">Nguồn đặt câu hỏi: review công khai từ plexico.io, FAQ, DeFi page, Terms & Conditions, AML policy và hồ sơ pháp nhân Florida.</span>
+      <span class="en-inline">Question basis: public review of plexico.io, the FAQ, DeFi page, Terms & Conditions, AML policy, and the Florida entity filing.</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <div class="sec-lbl"><span class="vi-inline">Nhận định về lợi nhuận / dòng tiền</span><span class="en-inline">View on profit / cash flow mechanics</span></div>
+    <h3 style="font-family:'Syne',sans-serif;font-size:1.2rem;line-height:1.2;margin:0 0 8px 0;color:var(--text);"><span class="vi-inline">THEO THẨM ĐỊNH HIỆN TẠI, DÒNG TIỀN CÓ THỂ ĐANG VẬN HÀNH NHƯ SAU</span><span class="en-inline">BASED ON CURRENT DUE DILIGENCE, CASH FLOW LIKELY WORKS AS FOLLOWS</span></h3>
+    <div class="alert warn" style="margin-top:10px;">
+      <strong><span class="vi-inline">Lưu ý:</span><span class="en-inline">Note:</span></strong>
+      <span class="vi-inline"> Đây là suy luận từ tài liệu công khai, chưa phải kết luận xác minh. Chỉ khi công ty cung cấp ví, dashboard, báo cáo PnL và đối soát dòng tiền thì mới xác nhận được.</span>
+      <span class="en-inline"> This is an inference from public materials, not a verified conclusion. It can only be confirmed once the company provides wallets, dashboards, PnL reports, and cash-flow reconciliations.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px;">
+      <div style="background:rgba(29,111,212,0.08);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-b);font-weight:700;margin-bottom:6px;">01</div>
+        <div style="font-weight:700;margin-bottom:6px;"><span class="vi-inline">User nạp tài sản số</span><span class="en-inline">Users deposit digital assets</span></div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.65;"><span class="vi-inline">User nạp BTC / ETH / USDT / USDC; hệ thống quy đổi hiển thị nội bộ sang PUT = 1 USD để quản lý sản phẩm và số dư.</span><span class="en-inline">Users deposit BTC / ETH / USDT / USDC; the system internally displays value in PUT = 1 USD for product and balance accounting.</span></div>
+      </div>
+      <div style="background:rgba(29,186,114,0.08);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-b);font-weight:700;margin-bottom:6px;">02</div>
+        <div style="font-weight:700;margin-bottom:6px;"><span class="vi-inline">Plexico triển khai vốn</span><span class="en-inline">Plexico deploys capital</span></div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.65;"><span class="vi-inline">Theo site, vốn được dùng cho liquidity provision, DEX pairs, staking và incentives. Công ty cũng giữ một phần yield thông qua cơ chế split 65/35 đến 95/5.</span><span class="en-inline">According to the site, capital is used for liquidity provision, DEX pairs, staking, and incentives. The company also retains part of yield through the 65/35 to 95/5 split.</span></div>
+      </div>
+      <div style="background:rgba(232,169,42,0.08);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px;">03</div>
+        <div style="font-weight:700;margin-bottom:6px;"><span class="vi-inline">Payout được hạch toán nội bộ trước</span><span class="en-inline">Payouts appear to be credited internally first</span></div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.65;"><span class="vi-inline">DailyFlow/LifeFlow thể hiện payout theo ngày hoặc theo tuần; nhưng tài liệu công khai chưa chứng minh mỗi payout đó đã là dòng tiền realized trên chain hay mới là accrual trong ledger nội bộ.</span><span class="en-inline">DailyFlow/LifeFlow show daily or weekly payouts; however, public materials do not prove whether each payout is already realized on-chain cash or only an internal ledger accrual.</span></div>
+      </div>
+      <div style="background:rgba(176,112,240,0.08);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#b070f0;font-weight:700;margin-bottom:6px;">04</div>
+        <div style="font-weight:700;margin-bottom:6px;"><span class="vi-inline">Nguồn chi trả thực tế có thể gồm 4 lớp</span><span class="en-inline">The real payout source likely has 4 layers</span></div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.65;"><span class="vi-inline">(1) realized DeFi yield; (2) phần spread công ty giữ lại; (3) phí mở sản phẩm / reinvest / transfer; (4) treasury marketing hoặc dòng tiền mới nếu hệ thống chưa tách bạch đầy đủ. Điểm (4) cần được loại trừ bằng bằng chứng.</span><span class="en-inline">(1) realized DeFi yield; (2) retained company spread; (3) product-opening / reinvestment / transfer fees; and potentially (4) marketing treasury or new inflows if the system is not fully ring-fenced. Item (4) must be ruled out with evidence.</span></div>
+      </div>
+    </div>
+    <div class="alert info" style="margin-top:14px;">
+      <strong><span class="vi-inline">Câu hỏi cốt lõi cần công ty trả lời:</span><span class="en-inline">The core question the company must answer:</span></strong>
+      <span class="vi-inline"> “Nếu hôm nay dừng hoàn toàn user mới, thì dòng tiền hiện hữu từ protocol, spread và treasury có đủ để chi DailyFlow / LifeFlow / referral / Leadership Bonus đúng hạn không? Xin đưa báo cáo stress-test.”</span>
+      <span class="en-inline"> “If new user inflows stopped today, would existing protocol income, spread, and treasury still be enough to fund DailyFlow / LifeFlow / referral / Leadership Bonus on time? Please provide a stress-test report.”</span>
+    </div>
+  </div>
+
   <!-- FINAL COMMITMENT BOX -->
   <div style="background:linear-gradient(135deg,rgba(29,111,212,0.1),rgba(232,169,42,0.07));border:1px solid rgba(232,169,42,0.3);border-radius:14px;padding:24px 28px;text-align:center;">
     <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;"><span class="vi-inline">Tóm tắt yêu cầu cần phê duyệt ngay</span><span class="en-inline">Summary of immediate approval requirements</span></div>
