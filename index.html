@@ -442,6 +442,8 @@ body.en .en-inline{display:inline;}
 .app-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;}
 .app-tab.tab-plan.active{background:var(--gold);border-color:var(--gold);color:#1a0e00;}
 .app-tab.tab-plan:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.app-tab.tab-budget.active{background:var(--green-b);border-color:var(--green-b);color:#04110b;}
+.app-tab.tab-budget:hover:not(.active){border-color:var(--green-b);color:var(--green-b);}
 .app-shortcut{padding:6px 16px;border-radius:6px;border:1px solid rgba(232,169,42,0.35);background:transparent;color:var(--gold);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.02em;}
 .app-shortcut:hover{background:rgba(232,169,42,0.12);border-color:var(--gold);}
 .ub-lang{display:flex;gap:5px;}
@@ -454,6 +456,21 @@ body.en .en-inline{display:inline;}
 #app-present .nav-dots{display:flex;}
 #app-plan .nav-dots{display:none;}
 #app-present .sidenav{display:none;}
+.detail-shell{max-width:1280px;margin:0 auto;padding:88px 20px 56px;}
+.detail-nav{position:sticky;top:64px;z-index:140;display:flex;gap:8px;flex-wrap:wrap;padding:12px 0 14px;background:linear-gradient(180deg,rgba(4,8,15,0.96),rgba(4,8,15,0.8),rgba(4,8,15,0));}
+.detail-link{padding:9px 14px;border-radius:999px;border:1px solid var(--border2);background:rgba(255,255,255,0.03);color:var(--text);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .18s;}
+.detail-link:hover{border-color:var(--blue);color:var(--blue-b);}
+.detail-hero{padding:22px 24px;border:1px solid var(--border2);border-radius:16px;background:linear-gradient(135deg,rgba(29,111,212,0.1),rgba(29,186,114,0.05),rgba(232,169,42,0.06));}
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;}
+.detail-stat{padding:14px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,0.03);}
+.detail-stat .n{font-family:'Syne',sans-serif;font-size:1.45rem;font-weight:800;line-height:1;color:#fff;margin-bottom:5px;}
+details.detail-fold{border:1px solid var(--border2);border-radius:14px;background:rgba(255,255,255,0.02);overflow:hidden;}
+details.detail-fold + details.detail-fold{margin-top:12px;}
+details.detail-fold summary{list-style:none;cursor:pointer;padding:16px 18px;font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);background:rgba(255,255,255,0.03);}
+details.detail-fold summary::-webkit-details-marker{display:none;}
+details.detail-fold[open] summary{border-bottom:1px solid var(--border2);}
+details.detail-fold .fold-body{padding:16px 18px 18px;}
+@media(max-width:680px){.detail-shell{padding-left:16px;padding-right:16px;padding-top:82px;}.detail-nav{top:58px;}}
 </style>
 </head>
 <body class="en">
@@ -465,13 +482,17 @@ body.en .en-inline{display:inline;}
       <span class="en-inline">📊 Presentation</span>
       <span class="vi-inline">📊 Giới Thiệu</span>
     </button>
-    <button class="app-shortcut" id="tab-questions" onclick="openQuestions()">
-      <span class="en-inline">❓ Questions</span>
-      <span class="vi-inline">❓ Cần Làm Rõ</span>
-    </button>
     <button class="app-tab tab-plan" id="tab-plan" onclick="switchApp('plan',this)">
       <span class="en-inline">🗺️ Market Plan</span>
       <span class="vi-inline">🗺️ Kế Hoạch</span>
+    </button>
+    <button class="app-tab tab-budget" id="tab-budget" onclick="switchApp('budget',this)">
+      <span class="en-inline">📑 Budget in Details</span>
+      <span class="vi-inline">📑 Chi Tiết Ngân Sách</span>
+    </button>
+    <button class="app-shortcut" id="tab-questions" onclick="openQuestions()">
+      <span class="en-inline">❓ Questions</span>
+      <span class="vi-inline">❓ Cần Làm Rõ</span>
     </button>
   </div>
   <div class="ub-lang">
@@ -2272,6 +2293,497 @@ body.en .en-inline{display:inline;}
   </div>
 </div>
 </div>
+</div>
+
+<div id="app-budget" class="app-section">
+  <div class="detail-shell">
+    <div class="detail-hero" id="bd-top">
+      <div class="sec-lbl"><span class="vi-inline">Budget in Details</span><span class="en-inline">Budget in Details</span></div>
+      <h2 class="sec-h" style="margin-bottom:8px;"><span class="vi-text">PLEXICO MARKET PLAN WORKBOOK — BẢN TRÌNH BÀY DỄ ĐỌC</span><span class="en-text">PLEXICO MARKET PLAN WORKBOOK — READABLE WEB VERSION</span></h2>
+      <p class="sec-sub" style="max-width:980px;margin-bottom:0;">
+        <span class="vi-text">Toàn bộ nội dung dưới đây được trình bày lại từ file Excel bạn tải lên: `plexico_market_plan.xlsx`. Đây là ảnh chụp của workbook tại thời điểm upload, nên một số số liệu có thể khác với phần `Market Plan` nếu bạn đã chỉnh plan trên site sau đó.</span>
+        <span class="en-text">Everything below is rendered from the uploaded `plexico_market_plan.xlsx` workbook. This is a snapshot of the workbook at upload time, so some values may differ from the `Market Plan` section if the website plan was edited later.</span>
+      </p>
+      <div class="detail-grid">
+        <div class="detail-stat"><div class="n" style="color:var(--gold);">$15,000</div><div><span class="vi-inline">Giải ngân công ty ngay</span><span class="en-inline">Immediate company release</span></div></div>
+        <div class="detail-stat"><div class="n" style="color:var(--blue-b);">$37,500</div><div><span class="vi-inline">Tổng nhu cầu khởi động ngay</span><span class="en-inline">Total immediate launch need</span></div></div>
+        <div class="detail-stat"><div class="n" style="color:var(--green-b);">$176,800</div><div><span class="vi-inline">Tổng ngân sách vận hành 8 tháng</span><span class="en-inline">8-month operating budget</span></div></div>
+        <div class="detail-stat"><div class="n" style="color:var(--text);">$9.1M</div><div><span class="vi-inline">Dự phóng deposit mới từ workbook</span><span class="en-inline">Workbook projected new deposits</span></div></div>
+      </div>
+    </div>
+
+    <div class="detail-nav">
+      <button class="detail-link" onclick="goTo('bd-overview')">Overview</button>
+      <button class="detail-link" onclick="goTo('bd-kpi')">KPI Tracker</button>
+      <button class="detail-link" onclick="goTo('bd-m1')">Month 1</button>
+      <button class="detail-link" onclick="goTo('bd-m28')">Months 2-8</button>
+      <button class="detail-link" onclick="goTo('bd-pipeline')">Pipeline</button>
+      <button class="detail-link" onclick="goTo('bd-model')">Financial Model</button>
+    </div>
+
+    <section id="bd-overview" style="margin-top:8px;">
+      <div class="sec-lbl"><span class="vi-inline">Workbook Overview</span><span class="en-inline">Workbook Overview</span></div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="padding:16px 18px;border-bottom:1px solid var(--border2);">
+          <div style="font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;">Immediate Approval Required</div>
+          <div style="font-size:12px;color:var(--muted);"><span class="vi-inline">Từ sheet `📊 Overview`</span><span class="en-inline">From `📊 Overview` sheet</span></div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Detail</th>
+                <th>Amount</th>
+                <th>Initially Release</th>
+                <th>When 50% KPI Reached</th>
+                <th>Status</th>
+                <th>Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Month 1 Operations Budget</td>
+                <td>Full 8-item operating plan</td>
+                <td><strong>$30,000</strong></td>
+                <td style="color:var(--gold);">$15,000</td>
+                <td style="color:var(--blue-b);">$15,000</td>
+                <td>🔴 URGENT</td>
+                <td>Launch infrastructure</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Leader Investment Support</td>
+                <td>Wave 1: $4,500 → Wave 2: $2,000 → Wave 3: $1,000</td>
+                <td><strong>$7,500</strong></td>
+                <td style="color:var(--gold);">$7,500</td>
+                <td style="color:var(--blue-b);">—</td>
+                <td>🟡 3 Waves</td>
+                <td>Real capital, earns daily</td>
+              </tr>
+              <tr class="total">
+                <td>—</td>
+                <td><strong>TOTAL IMMEDIATE NEED</strong></td>
+                <td>Company releases $15K</td>
+                <td><strong>$37,500</strong></td>
+                <td style="color:var(--gold);"><strong>$15,000</strong></td>
+                <td style="color:var(--blue-b);"><strong>$15,000</strong></td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px;padding:0;overflow:hidden;">
+        <div style="padding:16px 18px;border-bottom:1px solid var(--border2);">
+          <div style="font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;">8-Month Budget Summary</div>
+          <div style="font-size:12px;color:var(--muted);">Workbook snapshot values</div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Mo</th>
+                <th>Market</th>
+                <th>Phase / Focus</th>
+                <th>Total Budget</th>
+                <th>Company 50%</th>
+                <th>Partner 50%</th>
+                <th>New Deposits</th>
+                <th>Key Milestone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>🇻🇳 VN</td><td>Foundation · Channels · 6 Cities · KOL</td><td>$30,000</td><td>$15,000</td><td>$15,000</td><td>$50,000</td><td>Activate 3 accounts</td></tr>
+              <tr><td>2</td><td>🇻🇳 VN</td><td>Activate · Webinar · Referral boost</td><td>$10,800</td><td>$5,400</td><td>$5,400</td><td>$150,000</td><td>Proof-of-yield at scale</td></tr>
+              <tr><td>3</td><td>🇻🇳🇵🇭 VN + PH</td><td>Public launch + PH pilot</td><td>$27,200</td><td>$13,600</td><td>$13,600</td><td>$300,000</td><td>PH pilot live</td></tr>
+              <tr><td>4</td><td>🇻🇳🇵🇭 VN + PH</td><td>Scale both markets</td><td>$16,000</td><td>$8,000</td><td>$8,000</td><td>$600,000</td><td>10 leaders at L6+</td></tr>
+              <tr><td>5</td><td>🇻🇳🇵🇭🇮🇩 All 3</td><td>Indonesia entry</td><td>$17,000</td><td>$8,500</td><td>$8,500</td><td>$1,000,000</td><td>ID channels live</td></tr>
+              <tr><td>6</td><td>🇻🇳🇵🇭🇮🇩 All 3</td><td>Leadership summit + academy</td><td>$25,000</td><td>$12,500</td><td>$12,500</td><td>$1,500,000</td><td>3-country academy launch</td></tr>
+              <tr><td>7</td><td>🇻🇳🇵🇭🇮🇩 SEA</td><td>Full dominance + new products</td><td>$25,000</td><td>$12,500</td><td>$12,500</td><td>$2,500,000</td><td>LifeFlow premium launch</td></tr>
+              <tr><td>8</td><td>🇻🇳🇵🇭🇮🇩 SEA</td><td>Consolidate + year 2 prep</td><td>$25,000</td><td>$12,500</td><td>$12,500</td><td>$3,000,000</td><td>Year 2 plan approval</td></tr>
+              <tr class="total"><td>—</td><td colspan="2"><strong>TOTAL</strong></td><td><strong>$176,800</strong></td><td><strong>$88,400</strong></td><td><strong>$88,400</strong></td><td><strong>$9,100,000</strong></td><td><strong>Target workbook track</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="bd-kpi" style="margin-top:18px;">
+      <div class="sec-lbl"><span class="vi-inline">KPI Tracker</span><span class="en-inline">KPI Tracker</span></div>
+      <details class="detail-fold" open>
+        <summary>Monthly KPI Targets vs Actuals</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Mo</th>
+                <th>Country Focus</th>
+                <th>Category</th>
+                <th>Metric</th>
+                <th>Target</th>
+                <th>Budget Target</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>🇻🇳 Vietnam</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$50,000</td><td>$30,000</td><td>🎯 Target</td></tr>
+              <tr><td>1</td><td>🇻🇳 Vietnam</td><td>Community</td><td>Telegram Members</td><td>500</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>1</td><td>🇻🇳 Vietnam</td><td>Leaders</td><td>Tier-1 Leaders Recruited</td><td>16</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>1</td><td>🇻🇳 Vietnam</td><td>Content</td><td>Content Pieces Published</td><td>30</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>1</td><td>🇻🇳 Vietnam</td><td>Reach</td><td>Cities Activated</td><td>6</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>1</td><td>🇻🇳 Vietnam</td><td>KOL</td><td>KOLs Seeded</td><td>4</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>2</td><td>🇻🇳 Vietnam</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$150,000</td><td>$10,800</td><td>🎯 Target</td></tr>
+              <tr><td>2</td><td>🇻🇳 Vietnam</td><td>Community</td><td>Telegram Members</td><td>2,000</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>2</td><td>🇻🇳 Vietnam</td><td>Leaders</td><td>Active Leaders</td><td>26</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>2</td><td>🇻🇳 Vietnam</td><td>Events</td><td>Webinar Attendees</td><td>300</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>2</td><td>🇻🇳 Vietnam</td><td>Retention</td><td>Investor Retention Rate</td><td>80%</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>3</td><td>🇻🇳🇵🇭 VN+PH</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$300,000</td><td>$28,000</td><td>🎯 Target</td></tr>
+              <tr><td>3</td><td>🇻🇳🇵🇭 VN+PH</td><td>Events</td><td>HCM Seminar Attendees</td><td>200</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>3</td><td>🇻🇳🇵🇭 VN+PH</td><td>KOL</td><td>Major KOLs Activated</td><td>5</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>3</td><td>🇻🇳🇵🇭 VN+PH</td><td>Reach</td><td>Social Reach</td><td>500K+</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>3</td><td>🇵🇭 Philippines</td><td>Community</td><td>PH Telegram/FB Members</td><td>1,000</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>3</td><td>🇵🇭 Philippines</td><td>Leaders</td><td>PH Pioneer Leaders</td><td>5</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>4</td><td>🇻🇳🇵🇭 VN+PH</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$600,000</td><td>$16,000</td><td>🎯 Target</td></tr>
+              <tr><td>4</td><td>🇻🇳🇵🇭 VN+PH</td><td>Leaders</td><td>Total Active Leaders</td><td>60</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>4</td><td>🇻🇳🇵🇭 VN+PH</td><td>Community</td><td>Total Community</td><td>10,000</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>4</td><td>🇻🇳 Vietnam</td><td>Partner</td><td>Leaders at Level 6+</td><td>10</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>5</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$1,000,000</td><td>$17,000</td><td>🎯 Target</td></tr>
+              <tr><td>5</td><td>🇮🇩 Indonesia</td><td>Community</td><td>ID WhatsApp/TG Members</td><td>500</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>5</td><td>🇮🇩 Indonesia</td><td>KOL</td><td>ID KOLs Onboarded</td><td>3</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>5</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Leaders</td><td>Total Leaders</td><td>100</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>6</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$1,500,000</td><td>$25,000</td><td>🎯 Target</td></tr>
+              <tr><td>6</td><td>🇻🇳 Vietnam</td><td>Events</td><td>Summit Attendees</td><td>100</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>6</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Education</td><td>Academy Students</td><td>500</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>6</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Community</td><td>Total Community</td><td>35,000</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>7</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$2,500,000</td><td>$25,000</td><td>🎯 Target</td></tr>
+              <tr><td>7</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Leaders</td><td>Total Leaders</td><td>200</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>7</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Product</td><td>LifeFlow Premium Clients</td><td>50</td><td>—</td><td>🎯 Target</td></tr>
+              <tr><td>8</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Deposits</td><td>New Deposits (PUT)</td><td>$3,000,000</td><td>$25,000</td><td>🎯 Target</td></tr>
+              <tr><td>8</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Cumulative</td><td>Total cumulative deposits</td><td>$10,000,000+</td><td>—</td><td>🏆 TARGET</td></tr>
+              <tr><td>8</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Leaders</td><td>Total Active Leaders</td><td>250</td><td>—</td><td>🏆 TARGET</td></tr>
+              <tr><td>8</td><td>🇻🇳🇵🇭🇮🇩 3 Countries</td><td>Retention</td><td>Investor Retention Rate</td><td>70%+</td><td>—</td><td>🏆 TARGET</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section id="bd-m1" style="margin-top:18px;">
+      <div class="sec-lbl"><span class="vi-inline">Month 1 Detail</span><span class="en-inline">Month 1 Detail</span></div>
+      <details class="detail-fold" open>
+        <summary>Month 1 Operating Budget — Vietnam Foundation</summary>
+        <div class="fold-body">
+          <div class="alert info" style="margin-top:0;">
+            <span class="vi-inline">Workbook headline: `Total $30,000 | First Release $15,000 | Second Release $15,000 | 6 cities | 4 KOLs | 16 leaders | Target $25,000 new deposits`.</span>
+            <span class="en-inline">Workbook headline: `Total $30,000 | First Release $15,000 | Second Release $15,000 | 6 cities | 4 KOLs | 16 leaders | Target $25,000 new deposits`.</span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Budget Item</th>
+                  <th>Deliverables / Details</th>
+                  <th>Total</th>
+                  <th>Tranche 1</th>
+                  <th>Tranche 2</th>
+                  <th>Timeline</th>
+                  <th>Owner</th>
+                  <th>Measure</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Setup Channels & Brand</td><td>Brand kit, Telegram + Zalo + FB + TikTok, 2 intro videos, bilingual PDF deck, landing page + hosting</td><td>$4,000</td><td>$2,000</td><td>$2,000</td><td>Week 1</td><td>Marketing Lead</td><td>Channels live + 200 members</td><td>Priority: Day 1</td></tr>
+                <tr><td>2</td><td>30-Day Content Production</td><td>30 infographics, 12 short videos, 4 long-form articles, AI content calendar, bilingual copy, FAQ</td><td>$4,000</td><td>$2,000</td><td>$2,000</td><td>Weeks 1-4</td><td>Content Team</td><td>30 pieces published</td><td>Batch produce W1</td></tr>
+                <tr><td>3</td><td>KOL Seeding × 4</td><td>4 finance micro-KOLs, 1 video + 3-5 posts each, authentic reviews only, 100 PUT trial</td><td>$4,500</td><td>$2,250</td><td>$2,250</td><td>Weeks 2-3</td><td>BD Lead</td><td>4 reviews live, 50K+ reach</td><td>Authentic-only approach</td></tr>
+                <tr><td>4</td><td>6-City Roadshow</td><td>HCM, Hanoi, Da Nang, Can Tho, Hai Phong, Nha Trang; 10 field days, 20-50 pax meetings each city</td><td>$8,000</td><td>$4,000</td><td>$4,000</td><td>Weeks 1-4</td><td>Sales Lead</td><td>20+ local contacts/city</td><td>Start HCM</td></tr>
+                <tr><td>5</td><td>AI Tools & Operations</td><td>ChatGPT, Canva, scheduler, Notion CRM, Zoom, domain, hosting, email tool</td><td>$2,000</td><td>$1,000</td><td>$1,000</td><td>Week 1</td><td>Ops Lead</td><td>All tools live Day 1</td><td>Annual licenses where possible</td></tr>
+                <tr><td>6</td><td>Community Launch Webinar</td><td>500+ attendees target, pro slides, moderator, replay, webinar bonus promo</td><td>$2,000</td><td>$1,000</td><td>$1,000</td><td>Week 2</td><td>MC + Tech</td><td>500+ attendees, 20+ deposits</td><td>Stream on FB + Zoom</td></tr>
+                <tr><td>7</td><td>Flexible Opportunity Fund</td><td>Unplanned leader meetings, printing, emergency travel, extra KOLs, venue bookings</td><td>$3,000</td><td>$1,500</td><td>$1,500</td><td>Ongoing</td><td>Team Lead</td><td>React within 24h</td><td>Do not pre-commit</td></tr>
+                <tr><td>8</td><td>Month-End Review & M2 Planning</td><td>Joint KPI review, data report, strategy adjustment, M2 + PH pilot presentation, sign-off gate</td><td>$2,500</td><td>$1,250</td><td>$1,250</td><td>Week 4</td><td>Strategy Lead</td><td>Report + M2 approval</td><td>Gate for M2 release</td></tr>
+                <tr class="total"><td>—</td><td><strong>Operating Total</strong></td><td>8 budget items</td><td><strong>$30,000</strong></td><td><strong>$15,000</strong></td><td><strong>$15,000</strong></td><td>—</td><td>—</td><td>Deposit target: $50,000</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="detail-fold">
+        <summary>Leader Investment Support — Separate from Operating Budget</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Wave</th>
+                <th>Leaders</th>
+                <th>Investment Structure</th>
+                <th>Amount</th>
+                <th>Timing</th>
+                <th>DailyFlow Level</th>
+                <th>Commission</th>
+                <th>Purpose</th>
+                <th>Expected Yield/mo</th>
+                <th>Cumulative</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>⚡ W1</td><td>1 TOP + 2 Mid</td><td>1×2,500 PUT + 2×1,000 PUT</td><td>$4,500</td><td>Week 1</td><td>L4 + L3</td><td>9% / 7.5%</td><td>Create live proof Day 2-3</td><td>$522</td><td>$4,500</td></tr>
+              <tr><td>W2</td><td>2 Mid Leaders</td><td>2×1,000 PUT</td><td>$2,000</td><td>Week 3</td><td>L3</td><td>7.5%</td><td>Expand after initial proof</td><td>$217.5</td><td>$6,500</td></tr>
+              <tr><td>W3</td><td>10 Base Leaders</td><td>10×100 PUT</td><td>$1,000</td><td>Week 4</td><td>L1</td><td>4%</td><td>Social proof and demo</td><td>$94.25</td><td>$7,500</td></tr>
+              <tr class="total"><td>TOTAL</td><td>16 Leaders</td><td>1×2500 + 4×1000 + 10×100</td><td><strong>$7,500</strong></td><td>3 waves</td><td>L1-L4</td><td>4%-9%</td><td>Investment, not cost</td><td><strong>$833.75</strong></td><td><strong>$7,500</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="detail-fold">
+        <summary>Week-by-Week Execution Plan</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Week</th>
+                <th>Period</th>
+                <th>Key Actions</th>
+                <th>Budget Used</th>
+                <th>KPI Check</th>
+                <th>Leader Action</th>
+                <th>Community Action</th>
+                <th>Content</th>
+                <th>Risk</th>
+                <th>Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>W1</td><td>Days 1-7</td><td>Localize brand kit, launch channels, approach 4 KOLs, HCM roadshow, activate 3 accounts</td><td>~$8,500</td><td>Channels live, 3 accts active</td><td>TOP leader onboarded</td><td>Telegram setup</td><td>5 brand posts + 1 video</td><td>Backup top leader needed</td><td>Marketing + BD</td></tr>
+              <tr><td>W2</td><td>Days 8-14</td><td>Profit screenshots, 3 KOL reviews, launch webinar, Hanoi + Hai Phong roadshow, onboard 3 mid-leaders</td><td>~$7,000</td><td>3 KOL posts, 500+ webinar</td><td>3 mid-leaders start referrals</td><td>200+ members</td><td>Daily proof series starts</td><td>Low webinar turnout</td><td>Sales + MC</td></tr>
+              <tr><td>W3</td><td>Days 15-21</td><td>Da Nang + Nha Trang roadshow, onboard 2 mid + 10 base leaders, daily proof posts, 4th KOL review</td><td>~$6,500</td><td>16 leaders total</td><td>Active referrals begin</td><td>500+ members</td><td>10 infographics + 4 Reels</td><td>Base leaders passive</td><td>Content + Sales</td></tr>
+              <tr><td>W4</td><td>Days 22-30</td><td>Can Tho roadshow, referrals push, hit $25K deposit milestone, joint KPI review, present Month 2 plan</td><td>~$5,000</td><td>$25K deposits, 500+ TG</td><td>Top leaders at $10K+ volume</td><td>500+ members</td><td>Month-end summary</td><td>Miss target → extend campaign</td><td>Strategy + Both parties</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section id="bd-m28" style="margin-top:18px;">
+      <div class="sec-lbl"><span class="vi-inline">Months 2-8 Detailed Budget</span><span class="en-inline">Months 2-8 Detailed Budget</span></div>
+      <details class="detail-fold" open>
+        <summary>Month 2 — Vietnam — Activate & First Wave — $10,800</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Budget Item</th><th>Deliverables</th><th>Total</th><th>Tranche 1</th><th>Tranche 2</th><th>Timeline</th><th>KPI / Measure</th><th>Owner</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Daily proof-of-yield content</td><td>Morning screenshots, Day X videos, comparison infographics</td><td>$800</td><td>$400</td><td>$400</td><td>Daily</td><td>30 posts + 10 videos</td><td>Content Team</td></tr>
+              <tr><td>2</td><td>2 Online Webinars</td><td>VN Live Q&A + overseas Vietnamese intro + live dashboard demo</td><td>$1,000</td><td>$500</td><td>$500</td><td>Weeks 6,8</td><td>600+ attendees</td><td>MC + Tech</td></tr>
+              <tr><td>3</td><td>Onboard 10 New Mid-Leaders</td><td>500 PUT support each, training, share guides, material kit</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Weeks 5-8</td><td>10 leaders active</td><td>Sales Lead</td></tr>
+              <tr><td>4</td><td>Referral Boost Campaign</td><td>50 PUT bonus per referral with $500+ deposit</td><td>$2,500</td><td>$1,250</td><td>$1,250</td><td>All month</td><td>30+ referred investors</td><td>Ops Lead</td></tr>
+              <tr><td>5</td><td>Education Content Level 1-2</td><td>15 DeFi videos, 2 live Q&A, blog + SEO, first newsletter</td><td>$1,500</td><td>$750</td><td>$750</td><td>Weeks 5-8</td><td>15 videos, 500 subs</td><td>Content Team</td></tr>
+              <tr class="total"><td>—</td><td><strong>Month 2 Total</strong></td><td>—</td><td><strong>$10,800</strong></td><td><strong>$5,400</strong></td><td><strong>$5,400</strong></td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="detail-fold">
+        <summary>Month 3 — VN + Philippines — Public Launch + PH Pilot — $27,200</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Budget Item</th><th>Deliverables</th><th>Total</th><th>Company</th><th>Partner</th><th>Timeline</th><th>KPI / Measure</th><th>Owner</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>5 Major KOL Campaign (VN)</td><td>3 crypto/finance KOLs + 2 finance YouTubers, review week, cross-promo</td><td>$8,000</td><td>$4,000</td><td>$4,000</td><td>Week 9-10</td><td>500K+ reach, 100+ leads</td><td>BD Lead</td></tr>
+              <tr><td>2</td><td>HCM Offline Seminar</td><td>200-300 attendees, venue, production, VIP, livestream, filming</td><td>$6,000</td><td>$3,000</td><td>$3,000</td><td>Week 11</td><td>200+ attendees, 30+ deposits</td><td>Events Lead</td></tr>
+              <tr><td>3</td><td>Paid Ads FB + TikTok</td><td>Investment-interest targeting, retargeting, 3 creatives</td><td>$2,500</td><td>$1,250</td><td>$1,250</td><td>Weeks 9-12</td><td>1M impressions, 200+ clicks</td><td>Digital</td></tr>
+              <tr><td>4</td><td>Plexico Academy VN — Module 1</td><td>4 lessons + quiz + materials, first 200 free</td><td>$1,500</td><td>$750</td><td>$750</td><td>Week 12</td><td>200 students</td><td>Education</td></tr>
+              <tr><td>5</td><td>PH Content Localization</td><td>20 pieces in Filipino English, OFW angle, channels setup</td><td>$1,200</td><td>$600</td><td>$600</td><td>Week 9-10</td><td>20 pieces live</td><td>PH Content</td></tr>
+              <tr><td>6</td><td>3 Philippines KOLs</td><td>Finance/crypto creators, Tagalog/English content</td><td>$4,000</td><td>$2,000</td><td>$2,000</td><td>Weeks 10-12</td><td>3 reviews live</td><td>PH BD</td></tr>
+              <tr><td>7</td><td>2 VN Leaders to PH</td><td>Training + travel support + Manila pioneer trip</td><td>$3,000</td><td>$1,500</td><td>$1,500</td><td>Week 11</td><td>5+ PH leaders identified</td><td>Sales Lead</td></tr>
+              <tr><td>8</td><td>PH Launch Webinar</td><td>300+ attendees, DailyFlow demo, success stories</td><td>$1,000</td><td>$500</td><td>$500</td><td>Week 12</td><td>300 attendees, 20+ deposits</td><td>PH MC</td></tr>
+              <tr class="total"><td>—</td><td><strong>Month 3 Total</strong></td><td>—</td><td><strong>$27,200</strong></td><td><strong>$13,600</strong></td><td><strong>$13,600</strong></td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="detail-fold">
+        <summary>Month 4 — VN + PH — Scale Both Markets — $16,000</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Budget Item</th><th>Deliverables</th><th>Total</th><th>Company</th><th>Partner</th><th>Timeline</th><th>KPI / Measure</th><th>Owner</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>VN Leadership Tier-Up Bonus</td><td>Top 5 leaders with $50K+ group volume → 500 PUT bonus each</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 4</td><td>5 leaders at L6+</td><td>VN Sales</td></tr>
+              <tr><td>2</td><td>VN Paid Ads Boost</td><td>Increase FB + Google, retarget webinar viewers</td><td>$2,000</td><td>$1,000</td><td>$1,000</td><td>Month 4</td><td>500K impressions</td><td>Digital</td></tr>
+              <tr><td>3</td><td>PH Community Expansion</td><td>Daily Tagalog/English content + 3 micro-events</td><td>$4,000</td><td>$2,000</td><td>$2,000</td><td>Month 4</td><td>3,000+ PH members</td><td>PH Lead</td></tr>
+              <tr><td>4</td><td>PH Additional KOLs</td><td>2 more KOLs focused on OFW audiences</td><td>$3,000</td><td>$1,500</td><td>$1,500</td><td>Month 4</td><td>100K+ new reach</td><td>PH BD</td></tr>
+              <tr><td>5</td><td>PH First Event Manila</td><td>100-150 pax hotel event</td><td>$2,000</td><td>$1,000</td><td>$1,000</td><td>Month 4</td><td>150 attendees, 15+ deposits</td><td>PH Events</td></tr>
+              <tr class="total"><td>—</td><td><strong>Month 4 Total</strong></td><td>—</td><td><strong>$16,000</strong></td><td><strong>$8,000</strong></td><td><strong>$8,000</strong></td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="detail-fold">
+        <summary>Month 5 — All 3 Countries — Indonesia Entry — $17,000</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Budget Item</th><th>Deliverables</th><th>Total</th><th>Company</th><th>Partner</th><th>Timeline</th><th>KPI / Measure</th><th>Owner</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>VN + PH Maintenance</td><td>Ongoing content, community, leadership support, monthly webinars</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 5</td><td>70%+ retention</td><td>VN+PH Teams</td></tr>
+              <tr><td>2</td><td>ID Bahasa Indonesia Content</td><td>15 localized pieces, 3 explainer videos</td><td>$1,500</td><td>$750</td><td>$750</td><td>Month 5 W1-2</td><td>15 pieces live</td><td>ID Content</td></tr>
+              <tr><td>3</td><td>ID WhatsApp Community Setup</td><td>WhatsApp Business, rules, welcome flow, 500 contacts</td><td>$500</td><td>$250</td><td>$250</td><td>Month 5 W1</td><td>500 contacts</td><td>ID Ops</td></tr>
+              <tr><td>4</td><td>3 ID KOLs</td><td>Investasi / keuangan creators, 200K+ reach</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 5 W2-4</td><td>3 reviews</td><td>ID BD</td></tr>
+              <tr><td>5</td><td>ID Co-Webinar</td><td>Community webinar with local crypto users</td><td>$2,000</td><td>$1,000</td><td>$1,000</td><td>Month 5 W3</td><td>500+ attendees</td><td>ID Events</td></tr>
+              <tr><td>6</td><td>ID First Leader Support</td><td>Support 5 ID pioneer leaders with 500 PUT each</td><td>$3,000</td><td>$1,500</td><td>$1,500</td><td>Month 5</td><td>5 leaders active</td><td>ID Sales</td></tr>
+              <tr class="total"><td>—</td><td><strong>Month 5 Total</strong></td><td>—</td><td><strong>$17,000</strong></td><td><strong>$8,500</strong></td><td><strong>$8,500</strong></td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="detail-fold">
+        <summary>Month 6 — Leadership Summit + Academy — $25,000</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Budget Item</th><th>Deliverables</th><th>Total</th><th>Company</th><th>Partner</th><th>Timeline</th><th>KPI / Measure</th><th>Owner</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>VN Leadership Summit</td><td>100+ Level 3+ leaders, strategy event, recognition</td><td>$8,000</td><td>$4,000</td><td>$4,000</td><td>Month 6 W2</td><td>100 leaders</td><td>VN Events</td></tr>
+              <tr><td>2</td><td>PH Conference Manila</td><td>50+ leaders, product update, recognition</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 6 W3</td><td>50 leaders</td><td>PH Events</td></tr>
+              <tr><td>3</td><td>ID Market Expansion</td><td>Growth drive, more KOLs, 2nd webinar, Jakarta event</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 6</td><td>2,000+ ID members</td><td>ID Lead</td></tr>
+              <tr><td>4</td><td>Plexico Academy — All 3 Nations</td><td>Module 2, simultaneous release, certificates</td><td>$4,000</td><td>$2,000</td><td>$2,000</td><td>Month 6</td><td>1,000 students</td><td>Education</td></tr>
+              <tr><td>5</td><td>Promo Campaign Start</td><td>Apple prizes promo, point system, competition</td><td>$3,000</td><td>$1,500</td><td>$1,500</td><td>Month 6</td><td>All leaders engaged</td><td>Marketing</td></tr>
+              <tr class="total"><td>—</td><td><strong>Month 6 Total</strong></td><td>—</td><td><strong>$25,000</strong></td><td><strong>$12,500</strong></td><td><strong>$12,500</strong></td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="detail-fold">
+        <summary>Month 7 — Full SEA Dominance + New Products — $25,000</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Budget Item</th><th>Deliverables</th><th>Total</th><th>Company</th><th>Partner</th><th>Timeline</th><th>KPI / Measure</th><th>Owner</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Full SEA Network Operations</td><td>Unified branding, coordinated content, events, community across 3 markets</td><td>$10,000</td><td>$5,000</td><td>$5,000</td><td>Month 7</td><td>70,000+ community total</td><td>Regional Lead</td></tr>
+              <tr><td>2</td><td>LifeFlow Premium Launch</td><td>Launch to VIP investors with 1-on-1 presentations</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 7</td><td>50+ LifeFlow clients</td><td>VIP Sales</td></tr>
+              <tr><td>3</td><td>Algo Trading Beta Announcement</td><td>Exclusive preview for Level 7+ leaders</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 7</td><td>Top 20 leaders briefed</td><td>Product</td></tr>
+              <tr><td>4</td><td>B2B Fintech Partnerships</td><td>9 community/fintech partnerships total across 3 countries</td><td>$5,000</td><td>$2,500</td><td>$2,500</td><td>Month 7</td><td>9 B2B deals signed</td><td>BD Lead</td></tr>
+              <tr class="total"><td>—</td><td><strong>Month 7 Total</strong></td><td>—</td><td><strong>$25,000</strong></td><td><strong>$12,500</strong></td><td><strong>$12,500</strong></td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="detail-fold">
+        <summary>Month 8 — Consolidate + Year 2 Prep — $25,000</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Budget Item</th><th>Deliverables</th><th>Total</th><th>Company</th><th>Partner</th><th>Timeline</th><th>KPI / Measure</th><th>Owner</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Reinvestment Campaign</td><td>Top-up campaign for existing investors</td><td>$8,000</td><td>$4,000</td><td>$4,000</td><td>Month 8</td><td>500+ investors top up</td><td>Retention Lead</td></tr>
+              <tr><td>2</td><td>Retention & Loyalty Program</td><td>Badges, priority support, exclusive webinars</td><td>$7,000</td><td>$3,500</td><td>$3,500</td><td>Month 8</td><td>70%+ retention</td><td>Community Lead</td></tr>
+              <tr><td>3</td><td>Promo Campaign Winners</td><td>Announce winners, PR event coverage</td><td>$4,000</td><td>$2,000</td><td>$2,000</td><td>Month 8 W4</td><td>500K+ reach</td><td>Marketing</td></tr>
+              <tr><td>4</td><td>Year 2 Strategy Planning</td><td>SG/MY/TH analysis, Y2 budget, top 20 leadership workshop</td><td>$6,000</td><td>$3,000</td><td>$3,000</td><td>Month 8</td><td>Y2 plan approved</td><td>Strategy</td></tr>
+              <tr class="total"><td>—</td><td><strong>Month 8 Total</strong></td><td>—</td><td><strong>$25,000</strong></td><td><strong>$12,500</strong></td><td><strong>$12,500</strong></td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section id="bd-pipeline" style="margin-top:18px;">
+      <div class="sec-lbl"><span class="vi-inline">KOL & Leader Pipeline</span><span class="en-inline">KOL & Leader Pipeline</span></div>
+      <details class="detail-fold" open>
+        <summary>KOL Pipeline</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Name / Handle</th><th>Platform</th><th>Country</th><th>Followers</th><th>Eng. Rate</th><th>Type</th><th>Status</th><th>Proposed Fee</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>[TBD — Finance KOL 1]</td><td>YouTube + FB</td><td>🇻🇳 VN</td><td>50K-100K</td><td>3-5%</td><td>Finance Influencer</td><td>🔍 Prospecting</td><td>$1,000</td><td>No rug-pull history</td></tr>
+              <tr><td>2</td><td>[TBD — Finance KOL 2]</td><td>TikTok</td><td>🇻🇳 VN</td><td>100K-200K</td><td>4%+</td><td>Finance Influencer</td><td>🔍 Prospecting</td><td>$1,500</td><td>Check engagement quality</td></tr>
+              <tr><td>3</td><td>[TBD — Community Admin]</td><td>Facebook Group</td><td>🇻🇳 VN</td><td>5K-30K members</td><td>High</td><td>Community Leader</td><td>🔍 Prospecting</td><td>$500</td><td>Group must be active</td></tr>
+              <tr><td>4</td><td>[TBD — Finance KOL 3]</td><td>TikTok + FB</td><td>🇻🇳 VN</td><td>20K-50K</td><td>4%+</td><td>Finance Influencer</td><td>🔍 Prospecting</td><td>$1,000</td><td>Gift 100 PUT first</td></tr>
+              <tr><td>5</td><td>[TBD — PH KOL 1]</td><td>YouTube + FB</td><td>🇵🇭 PH</td><td>100K-300K</td><td>3%+</td><td>Finance Influencer</td><td>📅 Month 3</td><td>$1,500</td><td>OFW preferred</td></tr>
+              <tr><td>6</td><td>[TBD — PH KOL 2]</td><td>TikTok</td><td>🇵🇭 PH</td><td>50K-150K</td><td>4%+</td><td>Finance Influencer</td><td>📅 Month 3</td><td>$1,200</td><td>Tagalog/English</td></tr>
+              <tr><td>7</td><td>[TBD — PH Community]</td><td>Facebook Group</td><td>🇵🇭 PH</td><td>10K-50K</td><td>High</td><td>Community Leader</td><td>📅 Month 3</td><td>$500</td><td>Crypto/OFW focus</td></tr>
+              <tr><td>8</td><td>[TBD — ID KOL 1]</td><td>YouTube</td><td>🇮🇩 ID</td><td>100K-300K</td><td>3%+</td><td>Finance Influencer</td><td>📅 Month 5</td><td>$1,500</td><td>Bahasa content</td></tr>
+              <tr><td>9</td><td>[TBD — ID KOL 2]</td><td>TikTok</td><td>🇮🇩 ID</td><td>50K-200K</td><td>4%+</td><td>Finance Influencer</td><td>📅 Month 5</td><td>$1,000</td><td>Islamic finance angle</td></tr>
+              <tr><td>10</td><td>[TBD — ID Community]</td><td>WhatsApp + TG</td><td>🇮🇩 ID</td><td>5K-20K</td><td>High</td><td>Community Leader</td><td>📅 Month 5</td><td>$500</td><td>Indodax / investasi</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="detail-fold">
+        <summary>Leader Pipeline — Tier 1 Core Team</summary>
+        <div class="fold-body" style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Name</th><th>City / Country</th><th>Investment</th><th>DailyFlow Level</th><th>Commission</th><th>Status</th><th>Recruited By</th><th>Wave</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>[TOP Leader]</td><td>HCM / 🇻🇳</td><td>2,500 PUT</td><td>L4 — Fast Start</td><td>9%</td><td>⚡ Wave 1</td><td>Direct</td><td>W1</td><td>Regional anchor</td></tr>
+              <tr><td>2</td><td>[Mid Leader 1]</td><td>Hanoi / 🇻🇳</td><td>1,000 PUT</td><td>L3 — Fast Start</td><td>7.5%</td><td>⚡ Wave 1</td><td>TOP Leader</td><td>W1</td><td>—</td></tr>
+              <tr><td>3</td><td>[Mid Leader 2]</td><td>HCM / 🇻🇳</td><td>1,000 PUT</td><td>L3 — Fast Start</td><td>7.5%</td><td>⚡ Wave 1</td><td>Direct</td><td>W1</td><td>—</td></tr>
+              <tr><td>4</td><td>[Mid Leader 3]</td><td>Da Nang / 🇻🇳</td><td>1,000 PUT</td><td>L3</td><td>7.5%</td><td>🟡 Wave 2</td><td>Direct</td><td>W2</td><td>—</td></tr>
+              <tr><td>5</td><td>[Mid Leader 4]</td><td>Can Tho / 🇻🇳</td><td>1,000 PUT</td><td>L3</td><td>7.5%</td><td>🟡 Wave 2</td><td>Direct</td><td>W2</td><td>—</td></tr>
+              <tr><td>6</td><td>[Base ×10]</td><td>6 Cities / 🇻🇳</td><td>100 PUT each</td><td>L1</td><td>4%</td><td>🟢 Wave 3</td><td>Mid Leaders</td><td>W3</td><td>Gift deposits</td></tr>
+              <tr><td>7</td><td>[PH Pioneer 1]</td><td>Manila / 🇵🇭</td><td>500 PUT</td><td>L2</td><td>6%</td><td>📅 Month 3</td><td>VN Leaders</td><td>M3</td><td>—</td></tr>
+              <tr><td>8</td><td>[PH Pioneer 2]</td><td>Manila / 🇵🇭</td><td>500 PUT</td><td>L2</td><td>6%</td><td>📅 Month 3</td><td>VN Leaders</td><td>M3</td><td>—</td></tr>
+              <tr><td>9</td><td>[ID Pioneer 1]</td><td>Jakarta / 🇮🇩</td><td>500 PUT</td><td>L2</td><td>6%</td><td>📅 Month 5</td><td>Direct</td><td>M5</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section id="bd-model" style="margin-top:18px;">
+      <div class="sec-lbl"><span class="vi-inline">Financial Model</span><span class="en-inline">Financial Model</span></div>
+      <div class="detail-grid" style="margin-top:0;">
+        <div class="card">
+          <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;">Key Assumptions</div>
+          <div class="irow"><span class="ik">Average Monthly Yield (DeFi)</span><span class="iv blue">14.5%</span></div>
+          <div class="irow"><span class="ik">Company Average Fund Retention</span><span class="iv gold">2.9%</span></div>
+          <div class="irow"><span class="ik">Client Share (Avg Level 4)</span><span class="iv green">80%</span></div>
+          <div class="irow"><span class="ik">Reinvestment Rate (DailyFlow)</span><span class="iv">100% compound</span></div>
+          <div class="irow"><span class="ik">Avg Investment per Investor</span><span class="iv">$2,000</span></div>
+          <div class="irow"><span class="ik">Monthly Investor Growth Rate</span><span class="iv">35% MoM</span></div>
+          <div class="irow"><span class="ik">Leader Referral Commission (Avg)</span><span class="iv">9%</span></div>
+          <div class="irow" style="border:none;"><span class="ik">Avg New Leaders per Month (M1-3)</span><span class="iv">8</span></div>
+        </div>
+        <div class="card">
+          <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;">Workbook Caveat</div>
+          <div class="alert warn" style="margin-top:0;">
+            <span class="vi-inline">Sheet `Financial Model` có một số dòng ROI summary trông như công thức chưa hoàn chỉnh hoặc giá trị không khớp (`366200`, `842000`, nhiều ô `0`). Tôi giữ nguyên tinh thần sheet, nhưng nên kiểm tra lại file gốc nếu bạn muốn dùng phần ROI này cho đối tác.</span>
+            <span class="en-inline">The `Financial Model` sheet appears to contain incomplete or inconsistent ROI summary formulas (`366200`, `842000`, several `0` values). I preserved the sheet’s intent, but this part should be rechecked before sharing externally.</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px;padding:0;overflow:hidden;">
+        <div style="padding:16px 18px;border-bottom:1px solid var(--border2);font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;">8-Month Deposit & Revenue Projection</div>
+        <div style="overflow-x:auto;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>M1</th>
+                <th>M2</th>
+                <th>M3</th>
+                <th>M4</th>
+                <th>M5</th>
+                <th>M6</th>
+                <th>M7</th>
+                <th>M8</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>New Deposits</td><td>$50,000</td><td>$150,000</td><td>$300,000</td><td>$600,000</td><td>$1,000,000</td><td>$1,500,000</td><td>$2,500,000</td><td>$3,000,000</td><td><strong>$9,100,000</strong></td></tr>
+              <tr><td>Cumulative Deposits</td><td>$50,000</td><td>$200,000</td><td>$500,000</td><td>$1,100,000</td><td>$2,100,000</td><td>$3,600,000</td><td>$6,100,000</td><td>$9,100,000</td><td><strong>$9,100,000</strong></td></tr>
+              <tr><td>Operating Budget</td><td>$30,000</td><td>$10,800</td><td>$28,000</td><td>$16,000</td><td>$17,000</td><td>$25,000</td><td>$25,000</td><td>$25,000</td><td><strong>$176,800</strong></td></tr>
+              <tr><td>Tranche 1 (50%)</td><td>$15,000</td><td>$5,400</td><td>$14,000</td><td>$8,000</td><td>$8,500</td><td>$12,500</td><td>$12,500</td><td>$12,500</td><td><strong>$88,400</strong></td></tr>
+              <tr><td>Tranche 2 (50%)</td><td>$15,000</td><td>$5,400</td><td>$14,000</td><td>$8,000</td><td>$8,500</td><td>$12,500</td><td>$12,500</td><td>$12,500</td><td><strong>$88,400</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
 <script>
